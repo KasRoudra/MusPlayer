@@ -13,6 +13,8 @@ else
 		exit
 	fi
 fi
+cd ~
+mkdir Music
 _path=$(echo $PATH | cut -d ":" -f 1)
 echo "$ cp musplayer.sh $_path/musplayer"
 cp musplayer.sh $_path/musplayer
