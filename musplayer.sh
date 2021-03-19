@@ -4,8 +4,8 @@
 # Github: github.com/BagazMukti/ , github.com/KasRoudra
 # Website: bagaz.org , N/A
 # Contact: me@bl33dz.me, N/A
-cd ~
-mkdir Music
+
+
 export DIR="~/Music"
 
 figlet MusPlayer
