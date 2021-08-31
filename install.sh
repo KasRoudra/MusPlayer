@@ -1,3 +1,14 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+# MusPlayer
+# Version    : 1.0
+# Author     : KasRoudra
+# Github     : https://github.com/KasRoudra
+# Email      : kasroudrakrd@gmail.com
+# Contact    : https://m.me/KasRoudra
+# Description: Play music in termux.
+# Music player termux
+
 white="\033[1;37m"
 red="\033[1;31m"
 green="\033[1;32m"
