@@ -79,6 +79,8 @@ ${purple}> play${green} <number>${yellow}  Plays that muscic
 ${purple}> play all       ${yellow}Plays all music
 ${purple}> repeat         ${yellow}Repeats the music (current: $blue$REPEAT$yellow)
 ${purple}> shuffle        ${yellow}Shuffles all music (current: $blue$SHUFFLE$yellow)
+${purple}> about          ${yellow}About this program
+${purple}> more           ${yellow}More tools from author
 ${purple}> exit           ${yellow}Exit from this program"
 	elif [ "$cmd" = "list" ]; then
 	echo
@@ -178,6 +180,23 @@ ${purple}> exit           ${yellow}Exit from this program"
 	        export SHUFFLE=false
 	        echo -e "\n${success}Shuffle turned off!"
 	    fi
+	elif echo "$cmd" | grep -q "about"; then
+	    clear
+	    echo -e "$logo"
+        echo -e "$red[ToolName]  ${cyan}  :[MusPlayer]
+$red[Version]    ${cyan} :[1.0]
+$red[Description]${cyan} :[Music player for termux]
+$red[Author]     ${cyan} :[KasRoudra]
+$red[Github]     ${cyan} :[https://github.com/KasRoudra] 
+$red[Messenger]  ${cyan} :[https://m.me/KasRoudra]
+$red[Email]      ${cyan} :[kasroudrakrd@gmail.com]"
+    read -p ">>> " abot
+    clear
+    echo -e "$logo"
+	elif echo "$cmd" | grep -q "more"; then
+	    xdg-open "https://github.com/KasRoudra/KasRoudra#My-Best-Works"
+	    clear
+		echo -e "$logo"
     elif [ "$cmd" = "clear" ]; then
 		clear
 		echo -e "$logo"

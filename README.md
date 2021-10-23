@@ -1,6 +1,6 @@
 <h1 align="center">MusPlayer</h1>
 
-![Musplayer-Banner](https://github.com/KasRoudra/MusPlayer/raw/main/banner.png)
+![Musplayer-Banner](banner.png)
 <h3 align="center">Music player for Termux using MPV and Bash</h3>
 <p align="center">
     <img src="https://img.shields.io/badge/Version-1.0-green?style=for-the-badge">
@@ -40,7 +40,7 @@ git clone https://github.com/KasRoudra/MusPlayer && cd MusPlayer && chmod +x * &
 
 ## [+] Preview:
 
-![Musplayer](https://github.com/KasRoudra/MusPlayer/raw/main/main.gif)
+![Musplayer](main.gif)
 
 ## [+] Features
 
