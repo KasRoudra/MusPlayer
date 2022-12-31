@@ -46,7 +46,6 @@ cyan="\033[0;36m"
 white="\033[0;37m"
 nc="\033[00m"
 
-script="$0"
 version="1.1"
 
 
@@ -342,7 +341,7 @@ play() {
     if [[ $repeat_count -ne 0 ]]; then
       ((repeat_count--))
     fi
-    if ! $all && ! $is_repeat; then
+    if ! $all && ! $is_repeat && [ $repeat_count -eq 0 ]; then
       break
     fi
   done
@@ -478,7 +477,7 @@ usage() {
   header="$cyan"
   body="$yellow"
   USAGE="${head}USAGE:
-   ${header}./${script} [options]
+   ${header}musplayer [options]
   
 ${head}OPTIONS:
 
@@ -493,13 +492,13 @@ ${head}OPTIONS:
    ${header}-t TIMEOUT, --timeout TIMEOUT
    ${header}                           ${body}Close playing after n seconds
    ${header}-a, --about                ${body}Shows tool information
-   ${header}-m, --more                 ${body}A link to githun for more script
+   ${header}-m, --more                 ${body}A link to github for more script
    ${header}-h, --help                 ${body}Shows this help
    ${header}-v, --version              ${body}Shows script version
 
     
 ${head}EXAMPLE:
-   ${header}./${script} -v"
+   ${header}musplayer -v"
    
   ALL="${head}NAME:
    ${header}MusPlayer
