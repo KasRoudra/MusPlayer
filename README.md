@@ -5,7 +5,7 @@
 <p align="center">
     <img src="https://img.shields.io/badge/Version-1.1-green?style=for-the-badge">
     <img src="https://img.shields.io/github/license/KasRoudra/MusPlayer?style=for-the-badge&color=blue">
- <br>
+   <br>
     <img src="https://img.shields.io/badge/Author-KasRoudra-purple?style=flat-square">
     <img src="https://img.shields.io/badge/Open%20Source-Yes-cyan?style=flat-square">
     <img src="https://img.shields.io/badge/Written%20In-Shell-blue?style=flat-square">
@@ -13,22 +13,22 @@
  
 ## [~] Installation
 
-```
-git clone https://github.com/KasRoudra/MusPlayer
-```
+##### Clone this repository
 
-```
-cd MusPlayer
-```
+ - ```git clone https://github.com/KasRoudra/MusPlayer```
 
-```
-./install.sh
+##### Enter the directory
+ - ```cd MusPlayer```
 
-```
+##### Run the installer
+ - ```./install.sh```
+
+##### Run the player
+ - ```musplayer```
 
 ### Or, Use Single Command
 ```
-git clone https://github.com/KasRoudra/MusPlayer && cd MusPlayer && chmod +x * && .install.sh
+git clone https://github.com/KasRoudra/MusPlayer && cd MusPlayer && ./install.sh
 ```
 
 ## [+] Usage
