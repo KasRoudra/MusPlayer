@@ -3,7 +3,7 @@
 ![Musplayer-Banner](banner.png)
 <h3 align="center">Music player for Termux using MPV and Bash</h3>
 <p align="center">
-    <img src="https://img.shields.io/badge/Version-1.0-green?style=for-the-badge">
+    <img src="https://img.shields.io/badge/Version-1.1-green?style=for-the-badge">
     <img src="https://img.shields.io/github/license/KasRoudra/MusPlayer?style=for-the-badge&color=blue">
  <br>
     <img src="https://img.shields.io/badge/Author-KasRoudra-purple?style=flat-square">
