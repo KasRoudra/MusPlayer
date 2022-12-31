@@ -1,7 +1,7 @@
 <h1 align="center">MusPlayer</h1>
 
-![Musplayer-Banner](banner.png)
-<h3 align="center">Music player for Termux using MPV and Bash</h3>
+![Musplayer-Banner](files/banner.png)
+<h3 align="center">Terminal based music player</h3>
 <p align="center">
     <img src="https://img.shields.io/badge/Version-1.1-green?style=for-the-badge">
     <img src="https://img.shields.io/github/license/KasRoudra/MusPlayer?style=for-the-badge&color=blue">
@@ -11,7 +11,7 @@
     <img src="https://img.shields.io/badge/Written%20In-Shell-blue?style=flat-square">
 </p> 
  
-## [+] Installation
+## [~] Installation
 
 ```
 git clone https://github.com/KasRoudra/MusPlayer
@@ -22,13 +22,13 @@ cd MusPlayer
 ```
 
 ```
-bash install.sh
+./install.sh
 
 ```
 
 ### Or, Use Single Command
 ```
-git clone https://github.com/KasRoudra/MusPlayer && cd MusPlayer && chmod +x * && bash install.sh
+git clone https://github.com/KasRoudra/MusPlayer && cd MusPlayer && chmod +x * && .install.sh
 ```
 
 ## [+] Usage
@@ -40,19 +40,30 @@ git clone https://github.com/KasRoudra/MusPlayer && cd MusPlayer && chmod +x * &
 
 ## [+] Preview:
 
-![Musplayer](main.gif)
+![Musplayer](files/main.gif)
 
-## [+] Features
+## [*] Features
 
  - Repeat (Applied in `play <number>`)
  - Shuffle (Applied in `play all`)
  - Any directory
  - Play all
+ - Search within list
+ - Set a timeout
+ - Argument/Flag support
  
 ## [+] Credit
-Base code from [BagazMukti](https://github.com/BagazMukti/muxsic)
+Some base code is from [BagazMukti](https://github.com/BagazMukti/muxsic)
 
-### [+] Find me on 
-<a href="mailto:kasroudrakrd@gmail.com" target="_blank"><img src="https://img.shields.io/badge/Email-kasroudrakrd@gmail.com-blue?style=for-the-badge&logo=gmail"></a>
+####  Want to show support? Just spread the word and smash the star button
 
-<a href="https://m.me/KasRoudra" target="_blank"><img src="https://img.shields.io/badge/Messenger-KasRoudra-blue?style=for-the-badge&logo=messenger"></a>
+## [~] Find Me on :
+
+- [![Github](https://img.shields.io/badge/Github-KasRoudra-green?style=for-the-badge&logo=github)](https://github.com/KasRoudra)
+
+- [![Gmail](https://img.shields.io/badge/Gmail-KasRoudra-green?style=for-the-badge&logo=gmail)](mailto:kasroudrakrd@gmail.com)
+
+- [![Facebook](https://img.shields.io/badge/Facebook-KasRoudra-green?style=for-the-badge&logo=facebook)](https://facebook.com/KasRoudra)
+
+- [![Messenger](https://img.shields.io/badge/Messenger-KasRoudra-green?style=for-the-badge&logo=messenger)](https://m.me/KasRoudra)
+
