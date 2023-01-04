@@ -324,15 +324,20 @@ play() {
     item=${music_list[(($index-1))]}
     music=${item//%%/ }
     runtime=$(mediainfo "$directory/$music" | grep Duration | head -1 | awk -F ":" '{print $2}')
-    min=$(echo "$runtime" | awk '{print $1}')
-    sec=$(echo "$runtime" | awk '{print $3}')
-    if ! [[ $min =~ $num ]]; then
-      min=0
-      sec=$(echo "$runtime" | awk '{print $1}')
+    if [ -n "$runtime" ]; then
+      min=$(echo "$runtime" | awk '{print $1}')
+      sec=$(echo "$runtime" | awk '{print $3}')
+      if ! [[ $min =~ $num ]]; then
+        min=0
+        sec=$(echo "$runtime" | awk '{print $1}')
+      fi
+      duration=$(expr $min "*" 60 + $sec)
+    else
+      error "Failed to fetch duration!"
+      duration=0
     fi
-    duration=$(expr $min "*" 60 + $sec)
-    if [[ $duration -gt $timeout_count ]]; then
-      success "Playing ${music}...."
+    if [[ $duration -eq 0 ]] || [[ $duration -gt $timeout_count ]]; then
+      success "Playing ${cyan}${music}${green}...."
       mpv "$directory/$music"
     fi
     if [[ $timeout_count -ne 0 ]]; then
