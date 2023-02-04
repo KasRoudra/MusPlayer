@@ -28,7 +28,7 @@
 
 ### Or, Use Single Command
 ```
-git clone https://github.com/KasRoudra/MusPlayer && cd MusPlayer && ./install.sh
+bash -c $(curl -fSSL https://raw.githubusercontent.com/KasRoudra/Musplayer/main/install.sh)
 ```
 
 ## [+] Usage
@@ -50,12 +50,16 @@ git clone https://github.com/KasRoudra/MusPlayer && cd MusPlayer && ./install.sh
  - Play all
  - Search within list
  - Set a timeout
+ - Recursive search
+ - Standard sort
  - Argument/Flag support
  
 ## [+] Credit
 Some base code is from [BagazMukti](https://github.com/BagazMukti/muxsic)
 
-####  Want to show support? Just spread the word and smash the star button
+#### [*] Support
+###### Want to show support? Just spread the word and smash the star button
+###### Donate BTC: ***3Lx8ikQQgZZpmFJzHDBuQHXzLXMeWMcZF3***
 
 ## [~] Find Me on :
 
@@ -66,4 +70,6 @@ Some base code is from [BagazMukti](https://github.com/BagazMukti/muxsic)
 - [![Facebook](https://img.shields.io/badge/Facebook-KasRoudra-green?style=for-the-badge&logo=facebook)](https://facebook.com/KasRoudra)
 
 - [![Messenger](https://img.shields.io/badge/Messenger-KasRoudra-green?style=for-the-badge&logo=messenger)](https://m.me/KasRoudra)
+
+- [![Telegram](https://img.shields.io/badge/Telegram-KasRoudra-green?style=for-the-badge&logo=telegram)](https://t.me/KasRoudra)
 

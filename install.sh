@@ -6,8 +6,8 @@
 # Github     : https://github.com/KasRoudra
 # Email      : kasroudrakrd@gmail.com
 # Contact    : https://m.me/KasRoudra
-# Description: Play music in termux.
-# Music player termux
+# Description: Play music in terminal.
+# Music player for terminal
 
 black="\033[0;30m"
 red="\033[0;31m"
@@ -97,10 +97,15 @@ welcome() {
   fi
 }
 
+
 installer() {
   info "Installing files......."
   path=$(get_path)
   target="$path/musplayer"
+  if ! [ -f "musplayer.sh" ]; then
+    curl https://raw.githubusercontent.com/KasRoudra/Musplayer/main/musplayer.sh -o musplayer.sh
+  fi
+
   if [ -n "$path" ]; then
     doas cp musplayer.sh "$target"
     doas chmod 777 "$target"

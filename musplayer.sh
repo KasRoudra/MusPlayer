@@ -63,6 +63,8 @@ prompt="${cyan}Mus${nc}@${cyan}Player ${red}$ ${nc}"
 directory="$HOME/Music"
 is_shuffle=false
 is_repeat=false
+is_recursive=true
+is_sort=true
 repeat_count=0
 timeout_count=0
 
@@ -180,6 +182,18 @@ help() {
   else
     shuffle_status="Off ✘ "
   fi
+  if $is_sort; then
+    sort_status="On ✔ "
+  else
+    sort_status="Off ✘ "
+  fi
+
+  if $is_recursive; then
+    recursive_status="On ✔ "
+  else
+    recursive_status="Off ✘ "
+  fi
+
   user_dir=$(swap_dir $directory)
   echo -e "${info}${cyan}List of commands:${yellow}
 ${cyan}>${purple} help             ${yellow}Shows this help
@@ -189,6 +203,8 @@ ${cyan}>${purple} chdir${green} <path>     ${yellow}Changes music list directory
 ${cyan}>${purple} play${green} <number>    ${yellow}Plays that music
 ${cyan}>${purple} play all         ${yellow}Plays all music
 ${cyan}>${purple} repeat${green} <number>  ${yellow}Repeats the music (current: $blue$repeat_status${yellow})
+${cyan}>${purple} recursive        ${yellow}Recursively show/play list (current: $blue$recursive_status${yellow})
+${cyan}>${purple} sort             ${yellow}Sort list (current: $blue$sort_status${yellow})
 ${cyan}>${purple} shuffle          ${yellow}Shuffles all music (current: $blue$shuffle_status$yellow)
 ${cyan}>${purple} timeout${green} <number> ${yellow}Timeout (current: $blue$timeout_status$yellow)
 ${cyan}>${purple} about            ${yellow}About this program
@@ -198,8 +214,28 @@ ${cyan}>${purple} exit             ${yellow}Exit from this program${nc}
 }
 
 get_list() {
+  if [ "$1" == "name" ]; then
+    show_name=true
+  else
+    show_name=false
+  fi
+  midargs=""
+  piped=""
   music_list=()
-  mp3list=$(ls $directory | grep mp3)
+  if ! $is_recursive; then
+    midargs+="-maxdepth 1"
+  fi
+  if $show_name; then
+    format="%f"
+  else
+    format="%P"
+  fi
+
+  if $is_sort; then
+    mp3list=$(find $directory $midargs -type f -name "*.mp3" -printf "$format\n" | awk -F '/' '{print $NF "=" $0}' | sort | awk -F "=" '{print $2}')
+  else
+    mp3list=$(find $directory $midargs -type f -name "*.mp3" -printf "$format\n")
+  fi
   replaced=${mp3list// /%%}
   for item in $replaced; do
     music_list+=("$item")
@@ -220,7 +256,7 @@ get_timeout() {
 }
 
 list() {
-  get_list
+  get_list name
   if [ -n "$music_list" ]; then
     count=${#music_list[@]}
     for index in $(seq $count); do
@@ -240,7 +276,7 @@ list() {
 search() {
   term="$1"
   found=0
-  get_list
+  get_list name
   if [ -n "$music_list" ]; then
     count=${#music_list[@]}
     for index in $(seq $count); do
@@ -257,9 +293,12 @@ search() {
     done
     if [[ $found -eq 0 ]]; then
       error "No music found for $term"
+    elif [[ $found -eq 1 ]]; then
+      echo
+      success "1 match found for $term!"
     else
       echo
-      success "$found match(s) found!"
+      success "$found matches found for $term!"
     fi
   else
      error "No music in $blue$directory!"
@@ -322,7 +361,9 @@ play() {
       fi
     fi
     item=${music_list[(($index-1))]}
+    base=$(basename "$item")
     music=${item//%%/ }
+    name=${base//%%/ }
     runtime=$(mediainfo "$directory/$music" | grep Duration | head -1 | awk -F ":" '{print $2}')
     if [ -n "$runtime" ]; then
       min=$(echo "$runtime" | awk '{print $1}')
@@ -337,7 +378,7 @@ play() {
       duration=0
     fi
     if [[ $duration -eq 0 ]] || [[ $duration -gt $timeout_count ]]; then
-      success "Playing ${cyan}${music}${green}...."
+      success "Playing ${cyan}${name}${green}...."
       mpv "$directory/$music"
     fi
     if [[ $timeout_count -ne 0 ]]; then
@@ -362,6 +403,27 @@ shuffle() {
     success "Shuffle is turned on!"
   fi
 }
+
+recursive() {
+  if $is_recursive; then
+    is_recursive=false
+    success "Recursive is turned off!"
+  else
+    is_recursive=true
+    success "Recursive is turned on!"
+  fi
+}
+
+sorter() {
+  if $is_sort; then
+    is_sort=false
+    success "Sort is turned off!"
+  else
+    is_sort=true
+    success "Sort is turned on!"
+  fi
+}
+
 
 repeat() {
   count="$1"
@@ -396,6 +458,8 @@ reset(){
   [ $is_termux ] && directory="/sdcard/Music"  || directory="$HOME/Music"
   is_repeat=false
   is_shuffle=false
+  is_recursive=true
+  is_sort=true
   timeout_count=0
   repeat_count=0
 }
@@ -444,6 +508,12 @@ menu() {
       r|repeat)
         repeat "$arg"
         ;;
+      rc|recursive)
+        recursive "$arg"
+        ;;
+      st|sort)
+        sorter "$arg"
+        ;;
       t|timeout)
         timeout "$arg"
         ;;
@@ -491,9 +561,11 @@ ${head}OPTIONS:
    ${header}-p INDEX, --play INDEX     ${body}Play music by index
    ${header}-d DIRECTORY, --dir DIRECTORY
    ${header}                           ${body}Set music directory
-   ${header}-s, --shuffle              ${body}Enable shuffle
+   ${header}-s, --shuffle              ${body}Swap shuffle (Default: $is_shuffle)
    ${header}-r NUMBER, --repeat NUMBER
-   ${header}                           ${body}Enable repeat for n times
+   ${header}                           ${body}Swap repeat for n times (Default: $is_repeat)
+   ${header}-rc, --recursive           ${body}Swap recursive (Default: $is_recursive)
+   ${header}-st, --sort                ${body}Swap sorting (Default: $is_sort)
    ${header}-t TIMEOUT, --timeout TIMEOUT
    ${header}                           ${body}Close playing after n seconds
    ${header}-a, --about                ${body}Shows tool information
@@ -583,6 +655,12 @@ main() {
       -r|--repeat)
         repeat $2
         shift
+        ;;
+      -rc|--recursive)
+        recursive
+        ;;
+      -st|--sort)
+        sorter
         ;;
       -t|--timeout)
         timeout $2
