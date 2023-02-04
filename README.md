@@ -28,7 +28,7 @@
 
 ### Or, Use Single Command
 ```
-bash -c $(curl -fSSL https://raw.githubusercontent.com/KasRoudra/Musplayer/main/install.sh)
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/KasRoudra/Musplayer/main/install.sh)"
 ```
 
 ## [+] Usage
